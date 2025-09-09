@@ -2,27 +2,30 @@
 import React from 'react'
 import { Settings } from 'lucide-react'
 
+export type Speed = 'slow' | 'normal' | 'fast'
+
 interface GearAnimationProps {
     size?: number
     className?: string
-    speed?: 'slow' | 'normal' | 'fast'
+    speed?: Speed
 }
 
 export const GearAnimation: React.FC<GearAnimationProps> = ({
     size = 48,
     className = '',
-    speed = 'normal'
+    speed = 'normal',
 }) => {
-    const speedClasses = {
-        slow: 'animate-[spin_30s_linear_infinite]',
-        normal: 'animate-[spin_20s_linear_infinite]',
-        fast: 'animate-[spin_10s_linear_infinite]'
+    const speedClasses: Record<Speed, string> = {
+        slow: 'animate-spin-slow',
+        normal: 'animate-spin',
+        fast: 'animate-spin-fast',
     }
 
     return (
         <Settings
             size={size}
-            className={`gear-icon ${speedClasses[speed]} ${className}`}
+            className={`gear-icon ${speedClasses[speed]} opacity-80 ${className}`}
+            style={{ stroke: '#B8860B' }}
         />
     )
 }
