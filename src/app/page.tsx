@@ -1,4 +1,4 @@
-import { Introduction } from '@/components/sections/Introduction'
+import { Introduction } from '@/components/sections/Profile'
 // import { About } from '@/components/sections/About'
 // import { Skills } from '@/components/sections/Skills'
 // import { Projects } from '@/components/sections/Projects'
