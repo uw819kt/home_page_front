@@ -13,7 +13,7 @@ const Sidebar = () => {
             collapsed ? "w-16" : "w-64"
         )}>
             <div className="flex items-center justify-between p-4">
-                {!collapsed && <h2 className="text-xl font-bold">My App</h2>}
+                {!collapsed && <h2 className="text-xl font-bold">NutriCoder</h2>}
                 <button onClick={() => setCollapsed(!collapsed)} className="text-sm">
                     {collapsed ? '▶' : '◀'}
                 </button>
@@ -36,7 +36,7 @@ const Sidebar = () => {
 
                 <a href="/projects" className="flex items-center space-x-2 hover:text-steampunk-brass transition">
                     <Folder />
-                    {!collapsed && <span>Portforio</span>}
+                    {!collapsed && <span>My Projects</span>}
                 </a>
             </nav>
         </aside>
