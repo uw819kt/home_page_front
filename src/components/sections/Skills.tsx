@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import { ChevronDown } from 'lucide-react'
 import { GearAnimation } from '@/components/animations/GearAnimation'
 import { useSkills } from '@/hooks/useApi'
 import { Loading } from '@/components/ui/Loading'
