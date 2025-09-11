@@ -4,6 +4,8 @@ import { Github } from 'lucide-react'
 import { GearAnimation } from '@/components/animations/GearAnimation'
 import { Button } from '@/components/ui/Button'
 import { useProfile } from '@/hooks/useApi'
+import { Loading } from '@/components/ui/Loading'
+
 
 export function Profile() {
     const { profile, loading } = useProfile()
@@ -23,27 +25,7 @@ export function Profile() {
         return () => clearInterval(interval)
     }, [loading])
 
-    if (loading) {
-        return (
-            <section className="min-h-screen flex flex-col items-center justify-center space-y-6 px-6">
-                {/* 歯車アイコン */}
-                <GearAnimation size={64} speed="fast" />
-
-                {/* パーセンテージ */}
-                <span className="text-steampunk-brass font-medium text-lg">
-                    {Math.floor(progress)}%
-                </span>
-
-                {/* プログレスバー */}
-                <div className="w-full max-w-md bg-steampunk-darker rounded-full h-4 overflow-hidden border border-steampunk-brass shadow-inner">
-                    <div
-                        className="h-full bg-gradient-to-r from-steampunk-brass to-steampunk-bronze transition-all duration-300"
-                        style={{ width: `${progress}%` }}
-                    ></div>
-                </div>
-            </section>
-        )
-    }
+    if (loading) return <Loading />
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -106,9 +88,6 @@ export function Profile() {
                     )}
                 </div>
             </div>
-
-            {/* 蒸気エフェクト（装飾） */}
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-steampunk-dark/50 to-transparent"></div>
         </section>
     )
 }
