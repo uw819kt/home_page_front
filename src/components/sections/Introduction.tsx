@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { Github } from 'lucide-react'
 import { GearAnimation } from '@/components/animations/GearAnimation'
 import { Button } from '@/components/ui/Button'
@@ -8,10 +8,39 @@ import { useProfile } from '@/hooks/useApi'
 export function Introduction() {
     const { profile, loading } = useProfile()
 
+    // ▼ ロード進捗用 state（擬似的に増加させる）
+    const [progress, setProgress] = useState(0)
+
+    useEffect(() => {
+        if (!loading) return
+        const interval = setInterval(() => {
+            setProgress((prev) => {
+                const next = prev + Math.random() * 10
+                return next >= 100 ? 100 : next
+            })
+        }, 150)
+
+        return () => clearInterval(interval)
+    }, [loading])
+
     if (loading) {
         return (
-            <section className="min-h-screen flex items-center justify-center">
+            <section className="min-h-screen flex flex-col items-center justify-center space-y-6 px-6">
+                {/* 歯車アイコン */}
                 <GearAnimation size={64} speed="fast" />
+
+                {/* パーセンテージ */}
+                <span className="text-steampunk-brass font-medium text-lg">
+                    {Math.floor(progress)}%
+                </span>
+
+                {/* プログレスバー */}
+                <div className="w-full max-w-md bg-steampunk-darker rounded-full h-4 overflow-hidden border border-steampunk-brass shadow-inner">
+                    <div
+                        className="h-full bg-gradient-to-r from-steampunk-brass to-steampunk-bronze transition-all duration-300"
+                        style={{ width: `${progress}%` }}
+                    ></div>
+                </div>
             </section>
         )
     }

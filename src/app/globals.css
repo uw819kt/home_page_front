@@ -2,13 +2,31 @@
 @import "tailwindcss";
 
 /* Steampunk Base Styles */
+:root {
+  --steampunk-brass: #B8860B;
+  --steampunk-copper: #8B4513;
+  --steampunk-bronze: #CD853F;
+  --steampunk-dark: #1a0e08;
+  --steampunk-darker: #0f0704;
+  --steampunk-brown: #2c1810;
+  --steampunk-cream: #F5F5DC;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--steampunk-brass) var(--steampunk-brown);
+}
+
 body {
-  background: linear-gradient(135deg, #2c1810 0%, #1a0e08 50%, #0f0704 100%);
+  background: linear-gradient(135deg, var(--steampunk-brown) 0%, var(--steampunk-dark) 50%, var(--steampunk-darker) 100%);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  color: var(--steampunk-cream);
 }
 
+/* 背景テクスチャ */
 body::before {
   content: '';
   position: fixed;
@@ -24,44 +42,134 @@ body::before {
   z-index: 1;
 }
 
-/* Steampunk Component Styles */
+/* Steampunk Component Classes */
 @layer components {
   .steampunk-section {
-    @apply bg-gradient-to-br from-steampunk-copper/30 to-steampunk-bronze/20 border-2 border-steampunk-copper rounded-xl p-6 md:p-8 relative backdrop-blur-steampunk shadow-[0_8px_32px_rgba(0, 0, 0, 0.3), inset_0_1px_0_rgba(212, 175, 55, 0.2)];
+    background-image: linear-gradient(to bottom right, rgba(139, 69, 19, 0.3), rgba(205, 133, 63, 0.2));
+    border-width: 2px;
+    border-color: #8B4513;
+    /* steampunk-copper */
+    border-radius: 1rem;
+    /* rounded-xl */
+    padding: 1.5rem;
+    /* p-6 */
+    /* md:p-8はメディアクエリで書く */
+    position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 175, 55, 0.2);
+  }
+
+  @media (min-width: 768px) {
+    .steampunk-section {
+      padding: 2rem;
+      /* md:p-8 */
+    }
   }
 
   .steampunk-section::before {
     content: '';
-    @apply absolute -top-px -left-px -right-px -bottom-px bg-gradient-to-45 from-steampunk-brass via-steampunk-copper to-steampunk-bronze rounded-xl -z-10 opacity-50;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    /* -inset-px */
+    background-image: linear-gradient(45deg, #B8860B, #8B4513, #CD853F);
+    border-radius: 1rem;
+    /* rounded-xl */
+    z-index: -10;
+    opacity: 0.5;
   }
 
   .steampunk-button {
-    @apply bg-gradient-to-r from-steampunk-brass to-steampunk-bronze text-steampunk-dark font-semibold px-6 py-3 rounded-lg border-2 border-steampunk-copper transition-all duration-300 ease-in-out hover:shadow-[0_0_20px_rgba(184, 134, 11, 0.5)] hover:scale-105 active:scale-95;
+    background-image: linear-gradient(to right, #B8860B, #CD853F);
+    /* from-steampunk-brass to-steampunk-bronze */
+    color: #1a0e08;
+    /* text-steampunk-dark */
+    font-weight: 600;
+    /* font-semibold */
+    padding-left: 1.5rem;
+    /* px-6 */
+    padding-right: 1.5rem;
+    padding-top: 0.75rem;
+    /* py-3 */
+    padding-bottom: 0.75rem;
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    border-width: 2px;
+    border-color: #8B4513;
+    /* border-steampunk-copper */
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+  }
+
+  .steampunk-button:hover {
+    box-shadow: 0 0 20px rgba(184, 134, 11, 0.5);
+    transform: scale(1.05);
+  }
+
+  .steampunk-button:active {
+    transform: scale(0.95);
+  }
+
+  .steampunk-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.5);
   }
 
   .gear-icon {
-    @apply text-steampunk-brass animate-gear-rotate;
+    color: #B8860B;
+    /* text-steampunk-brass */
+    animation: gear-rotate 20s linear infinite;
   }
 
   .steampunk-card {
-    @apply steampunk-section transition-all duration-300 hover:transform hover:scale-105 hover:-translate-y-2 hover:shadow-[0_15px_35px_rgba(184, 134, 11, 0.3)];
+    /* steampunk-sectionのスタイルを継承したいならコピーするか、親クラスをつける */
+    background-image: linear-gradient(to bottom right, rgba(139, 69, 19, 0.3), rgba(205, 133, 63, 0.2));
+    border-width: 2px;
+    border-color: #8B4513;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 175, 55, 0.2);
+    transition-property: all;
+    transition-duration: 300ms;
+  }
+
+  .steampunk-card:hover {
+    transform: translateY(-0.5rem) scale(1.05);
+    box-shadow: 0 15px 35px rgba(184, 134, 11, 0.3);
   }
 }
 
-/* Scrollbar Styling */
+/* Webkit Scrollbar */
 ::-webkit-scrollbar {
   width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #2c1810;
+  background: var(--steampunk-brown);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #B8860B, #8B4513);
+  background: linear-gradient(45deg, var(--steampunk-brass), var(--steampunk-copper));
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #CD853F, #B8860B);
+  background: linear-gradient(45deg, var(--steampunk-bronze), var(--steampunk-brass));
+}
+
+/* Focus styles */
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.5);
+  ring-offset: 2px;
+  /* これに相当するbox-shadowのoffsetは要調整 */
+  /* ring-offset-steampunk-darkの色をボックスシャドウの影として再現するなら以下も追加 */
+  /* 例: */
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.5), 0 0 0 4px #1a0e08;
 }
