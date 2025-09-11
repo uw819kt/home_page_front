@@ -16,16 +16,15 @@ export const GearAnimation: React.FC<GearAnimationProps> = ({
     speed = 'normal',
 }) => {
     const speedClasses: Record<Speed, string> = {
-        slow: 'animate-spin-slow',
-        normal: 'animate-spin',
-        fast: 'animate-spin-fast',
+        slow: 'animate-[spin_30s_linear_infinite]',
+        normal: 'animate-[spin_20s_linear_infinite]',
+        fast: 'animate-[spin_10s_linear_infinite]'
     }
 
     return (
         <Settings
             size={size}
-            className={`gear-icon ${speedClasses[speed]} opacity-80 ${className}`}
-            style={{ stroke: '#B8860B' }}
+            className={`gear-icon ${speedClasses[speed]} ${className}`}
         />
     )
 }

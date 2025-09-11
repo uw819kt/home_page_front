@@ -5,7 +5,7 @@ import { GearAnimation } from '@/components/animations/GearAnimation'
 import { Button } from '@/components/ui/Button'
 import { useProfile } from '@/hooks/useApi'
 
-export function Introduction() {
+export function Profile() {
     const { profile, loading } = useProfile()
 
     // ▼ ロード進捗用 state（擬似的に増加させる）
