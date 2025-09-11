@@ -1,7 +1,7 @@
 // API クライアント設定
 import axios from 'axios'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:3001'
 const API_VERSION = process.env.NEXT_PUBLIC_API_VERSION || 'v1'
 
 export const apiClient = axios.create({
