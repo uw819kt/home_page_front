@@ -37,6 +37,7 @@ export const useSkills = () => {
         try {
             setLoading(true)
             const response = await skillsApi.getAll()
+            setSkills(response.data)
             setError(null)
         } catch (err) {
             setError('Failed to fetch skills')
@@ -50,7 +51,7 @@ export const useSkills = () => {
         fetchSkills()
     }, [])
 
-    return { loading, error, refetch: fetchSkills }
+    return { skills, loading, error, refetch: fetchSkills }
 }
 
 export const useProjects = () => {
