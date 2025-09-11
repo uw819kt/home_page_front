@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Crimson_Text, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import Sidebar from '@/components/layout/Sidebar'
 
 const cinzel = Cinzel({
   subsets: ['latin'],
@@ -35,7 +36,10 @@ export default function RootLayout({
   return (
     <html lang="ja" className={`${cinzel.variable} ${crimsonText.variable} ${jetbrainsMono.variable}`}>
       <body className="font-crimson bg-steampunk-dark text-steampunk-cream">
-        {children}
+        <div className="flex min-h-screen">
+          <Sidebar />
+          <main className="flex-1 p-6">{children}</main>
+        </div>
       </body>
     </html>
   );
